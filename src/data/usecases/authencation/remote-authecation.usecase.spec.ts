@@ -3,8 +3,8 @@ import { HttpStatusCode } from "@/data/protocols/http";
 import { RemoteAuthentication } from "./remote-authentication.usecase";
 import { AuthenticationParams } from "@/domain/usecases";
 
-import { mockAccountModel, mockAuthentication } from "@/domain/test";
-import { HttpPostClientSpy } from "@/data/test";
+import { mockAccountModel, mockAuthentication } from "@/domain/mocks";
+import { HttpPostClientSpy } from "@/data/mocks";
 
 import { InvalidCredentialsError, UnexpectedError } from "@/domain/errors";
 import { AccountModel } from "@/domain/models";
