@@ -8,7 +8,7 @@ module.exports = {
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/'
   ],
-  // testEnvironment: 'jsdom',
+  testEnvironment: 'jsdom',
   transform: {
     '.+\\.(ts|tsx)$': 'ts-jest'
   },
