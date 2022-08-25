@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles.scss";
 
 import { Footer, Input, LoginHeader, Spinner } from "@/presentation/components";
+import FormStatus from "@/presentation/components/form-status";
 
 const Login: React.FC = () => {
   return (
@@ -26,10 +27,7 @@ const Login: React.FC = () => {
           Entrar
         </button>
         <span className={styles.link}>Criar conta</span>
-        <div className={styles.errorWrap}>
-          <span className={styles.error}>Erro</span>
-          <Spinner className={styles.spinner} />
-        </div>
+        <FormStatus message="Erro" />
       </form>
       <Footer />
     </div>
