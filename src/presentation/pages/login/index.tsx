@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.scss";
 
-import { Footer, LoginHeader, Spinner } from "@/presentation/components";
+import { Footer, Input, LoginHeader, Spinner } from "@/presentation/components";
 
 const Login: React.FC = () => {
   return (
@@ -10,18 +10,18 @@ const Login: React.FC = () => {
 
       <form className={styles.form}>
         <h2>Login</h2>
-        <div className={styles.inputWrap}>
-          <input type="email" name="email" placeholder="Digite seu e-mail" />
-          <span className={styles.status} />
-        </div>
-        <div className={styles.inputWrap}>
-          <input
-            type="password"
-            name="password"
-            placeholder="Digite sua senha"
-          />
-          <span className={styles.status} />
-        </div>
+        <Input
+          placeholder="Digite seu e-mail"
+          name="email"
+          type="email"
+          id="email"
+        />
+        <Input
+          placeholder="Digite sua senha"
+          name="password"
+          type="password"
+          id="password"
+        />
         <button className={styles.submit} type="submit">
           Entrar
         </button>
