@@ -36,7 +36,12 @@ const Login: React.FC = () => {
             type="password"
             id="password"
           />
-          <button className={styles.submit} type="submit">
+          <button
+            data-testid="submit"
+            disabled
+            className={styles.submit}
+            type="submit"
+          >
             Entrar
           </button>
           <span className={styles.link}>Criar conta</span>
