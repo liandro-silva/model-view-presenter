@@ -8,14 +8,21 @@ type InputProps = React.DetailedHTMLProps<
 >;
 
 const Input: React.FC<InputProps> = (props: InputProps) => {
-  const { errorState } = useContext(Context);
-  const error = errorState[props.name];
+  const { state, setState } = useContext(Context);
+  const error = state[props.name + "Error"];
   const enableInput = useCallback(
     (event: React.FocusEvent<HTMLInputElement, Element>) => {
       event.target.readOnly = false;
     },
     []
   );
+
+  const handleChange = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const getStatus = (): string => {
     return "🔴";
@@ -26,7 +33,13 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
   };
   return (
     <div className={styles.inputWrap}>
-      <input {...props} readOnly onFocus={enableInput} />
+      <input
+        data-testid={props.name}
+        {...props}
+        readOnly
+        onFocus={enableInput}
+        onChange={handleChange}
+      />
       <span
         data-testid={`${props.name}-status`}
         title={getTitle()}
