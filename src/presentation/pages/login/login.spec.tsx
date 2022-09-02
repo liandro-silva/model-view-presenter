@@ -66,4 +66,14 @@ describe("\n Page - Login \n", () => {
       email: "any_email",
     });
   });
+
+  it("should call Validation with correct password", () => {
+    const { sut, validationSpy } = makeSut();
+
+    const password = sut.getByTestId("password") as HTMLInputElement;
+    fireEvent.input(password, { target: { value: "any_password" } });
+    expect(validationSpy.input).toEqual({
+      password: "any_password",
+    });
+  });
 });
