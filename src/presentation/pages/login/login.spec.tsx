@@ -15,9 +15,11 @@ type SutTypes = {
 
 class ValidationSpy implements Validation {
   errorMessage: string;
-  input: object;
-  validate(input: object): string {
-    this.input = input;
+  fieldName: string;
+  fieldValue: string;
+  validate(fieldName: string, fieldValue: string): string {
+    this.fieldName = fieldName;
+    this.fieldValue = fieldValue;
     return this.errorMessage;
   }
 }
@@ -62,9 +64,8 @@ describe("\n Page - Login \n", () => {
 
     const emailInput = sut.getByTestId("email") as HTMLInputElement;
     fireEvent.input(emailInput, { target: { value: "any_email" } });
-    expect(validationSpy.input).toEqual({
-      email: "any_email",
-    });
+    expect(validationSpy.fieldName).toBe("email");
+    expect(validationSpy.fieldValue).toBe("any_email");
   });
 
   it("should call Validation with correct password", () => {
@@ -72,8 +73,7 @@ describe("\n Page - Login \n", () => {
 
     const password = sut.getByTestId("password") as HTMLInputElement;
     fireEvent.input(password, { target: { value: "any_password" } });
-    expect(validationSpy.input).toEqual({
-      password: "any_password",
-    });
+    expect(validationSpy.fieldName).toBe("password");
+    expect(validationSpy.fieldValue).toBe("any_password");
   });
 });
