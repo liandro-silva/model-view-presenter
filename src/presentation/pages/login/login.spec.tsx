@@ -7,6 +7,7 @@ import {
 } from "@testing-library/react";
 import Login from ".";
 import { ValidationSpy } from "@/presentation/mocks";
+import { faker } from "@faker-js/faker";
 
 type SutTypes = {
   sut: RenderResult;
@@ -52,17 +53,19 @@ describe("\n Page - Login \n", () => {
     const { sut, validationSpy } = makeSut();
 
     const emailInput = sut.getByTestId("email") as HTMLInputElement;
-    fireEvent.input(emailInput, { target: { value: "any_email" } });
+    const emailValue = faker.internet.email();
+    fireEvent.input(emailInput, { target: { value: emailValue } });
     expect(validationSpy.fieldName).toBe("email");
-    expect(validationSpy.fieldValue).toBe("any_email");
+    expect(validationSpy.fieldValue).toBe(emailValue);
   });
 
   it("should call Validation with correct password", () => {
     const { sut, validationSpy } = makeSut();
 
     const password = sut.getByTestId("password") as HTMLInputElement;
-    fireEvent.input(password, { target: { value: "any_password" } });
+    const passwordValue = faker.internet.password();
+    fireEvent.input(password, { target: { value: passwordValue } });
     expect(validationSpy.fieldName).toBe("password");
-    expect(validationSpy.fieldValue).toBe("any_password");
+    expect(validationSpy.fieldValue).toBe(passwordValue);
   });
 });
