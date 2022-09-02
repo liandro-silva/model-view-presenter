@@ -16,9 +16,19 @@ describe("\n Page - Login \n", () => {
     sut();
 
     const errorWrap = screen.getByTestId("error-wrap");
-    const submitButton = screen.getByTestId("submit") as HTMLButtonElement;
-
     expect(errorWrap.childElementCount).toBe(0);
+
+    const submitButton = screen.getByTestId("submit") as HTMLButtonElement;
     expect(submitButton.disabled).toBe(true);
+
+    const emailInput = screen.getByTestId("email-status") as HTMLInputElement;
+    expect(emailInput.title).toBe("Campo obrigatório");
+    expect(emailInput.textContent).toBe("🔴");
+
+    const passwordInput = screen.getByTestId(
+      "password-status"
+    ) as HTMLInputElement;
+    expect(passwordInput.title).toBe("Campo obrigatório");
+    expect(passwordInput.textContent).toBe("🔴");
   });
 });
