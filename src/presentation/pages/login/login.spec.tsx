@@ -6,23 +6,32 @@ import {
   cleanup,
 } from "@testing-library/react";
 import Login from ".";
-import { ValidationStub } from "@/presentation/mocks";
+
 import { faker } from "@faker-js/faker";
+
+import { ValidationStub, AuthenticationSpy } from "@/presentation/mocks";
+import { mockAuthentication } from "@/domain/mocks";
 
 type SutTypes = {
   sut: RenderResult;
+  authenticationSpy: AuthenticationSpy;
 };
 
 type SutParams = {
   validationError: string;
 };
+
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub();
+  const authenticationSpy = new AuthenticationSpy();
   validationStub.errorMessage = params?.validationError;
-  const sut = render(<Login validation={validationStub} />);
+  const sut = render(
+    <Login validation={validationStub} authentication={authenticationSpy} />
+  );
 
   return {
     sut,
+    authenticationSpy,
   };
 };
 
@@ -121,5 +130,21 @@ describe("\n Page - Login \n", () => {
 
     const loadingIndicator = sut.getByTestId("loading");
     expect(loadingIndicator).toBeTruthy();
+  });
+
+  it("should call Authentication with correct values", () => {
+    const { sut, authenticationSpy } = makeSut();
+    const { email, password } = mockAuthentication();
+
+    const emailInput = sut.getByTestId("email") as HTMLInputElement;
+    fireEvent.input(emailInput, { target: { value: email } });
+
+    const passwordInput = sut.getByTestId("password") as HTMLInputElement;
+    fireEvent.input(passwordInput, { target: { value: password } });
+
+    const submitButton = sut.getByTestId("submit") as HTMLButtonElement;
+    fireEvent.click(submitButton);
+
+    expect(authenticationSpy.params).toEqual({ email, password });
   });
 });
