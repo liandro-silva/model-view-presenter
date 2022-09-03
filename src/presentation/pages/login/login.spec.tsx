@@ -159,4 +159,15 @@ describe("\n Page - Login \n", () => {
 
     expect(authenticationSpy.callsCount).toBe(1);
   });
+
+  it("should not call Authentication if form is invalid", () => {
+    const validationError = faker.lorem.words();
+    const { sut, authenticationSpy } = makeSut({ validationError });
+    const { email, password } = mockAuthentication();
+
+    populateEmailField(sut, email);
+    fireEvent.submit(sut.getByTestId("form"));
+
+    expect(authenticationSpy.callsCount).toBe(0);
+  });
 });
