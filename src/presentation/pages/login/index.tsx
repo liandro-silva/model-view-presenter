@@ -8,12 +8,14 @@ import {
   FormStatus,
 } from "@/presentation/components";
 import { Validation } from "@/presentation/protocols/validation.protocol";
+import { Authentication } from "@/domain/usecases";
 
 type Props = {
   validation: Validation;
+  authentication: Authentication;
 };
 
-const Login: React.FC<Props> = ({ validation }) => {
+const Login: React.FC<Props> = ({ validation, authentication }) => {
   const [state, setState] = useState({
     isLoading: false,
     email: "",
@@ -31,16 +33,19 @@ const Login: React.FC<Props> = ({ validation }) => {
     });
   }, [state.email, state.password]);
 
-  const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      setState({
-        ...state,
-        isLoading: true,
-      });
-    },
-    []
-  );
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    event.preventDefault();
+    setState({
+      ...state,
+      isLoading: true,
+    });
+    await authentication.execute({
+      email: state.email,
+      password: state.password,
+    });
+  };
 
   return (
     <div className={styles.login}>
