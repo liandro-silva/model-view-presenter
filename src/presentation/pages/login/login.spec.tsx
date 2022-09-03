@@ -149,4 +149,14 @@ describe("\n Page - Login \n", () => {
 
     expect(authenticationSpy.params).toEqual({ email, password });
   });
+
+  it("should call Authentication only once", () => {
+    const { sut, authenticationSpy } = makeSut();
+    const { email, password } = mockAuthentication();
+
+    simulateValidSubmit(sut, email, password);
+    simulateValidSubmit(sut, email, password);
+
+    expect(authenticationSpy.callsCount).toBe(1);
+  });
 });
