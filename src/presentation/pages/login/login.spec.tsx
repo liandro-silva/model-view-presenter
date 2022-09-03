@@ -91,4 +91,18 @@ describe("\n Page - Login \n", () => {
     expect(passwordStatus.title).toBe("");
     expect(passwordStatus.textContent).toBe("🟢");
   });
+
+  it("should enable submit button is form is valid", () => {
+    const { sut, validationStub } = makeSut();
+    validationStub.errorMessage = null;
+
+    const email = sut.getByTestId("email") as HTMLInputElement;
+    fireEvent.input(email, { target: { value: faker.internet.email() } });
+
+    const password = sut.getByTestId("password") as HTMLInputElement;
+    fireEvent.input(password, { target: { value: faker.internet.password() } });
+
+    const submitButton = sut.getByTestId("submit") as HTMLButtonElement;
+    expect(submitButton.disabled).toBe(false);
+  });
 });
