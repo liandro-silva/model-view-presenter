@@ -74,6 +74,9 @@ describe("\n Page - Login \n", () => {
   afterEach(() => {
     cleanup();
   });
+  beforeEach(() => {
+    localStorage.clear();
+  });
 
   it("should start with initial states", () => {
     const validationError = faker.lorem.words();
@@ -187,5 +190,16 @@ describe("\n Page - Login \n", () => {
     });
     const errorWrap = sut.getByTestId("error-wrap");
     expect(errorWrap.childElementCount).toBe(1);
+  });
+
+  it("should add accessToken to localstorage on success", async () => {
+    const { sut, authenticationSpy } = makeSut();
+    const { email, password } = mockAuthentication();
+
+    simulateValidSubmit(sut, email, password);
+    expect(localStorage.setItem).toHaveBeenCalledWith(
+      "accessToken",
+      authenticationSpy.account.accessToken
+    );
   });
 });

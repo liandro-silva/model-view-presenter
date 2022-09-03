@@ -9,5 +9,5 @@ export const mockAuthentication = (): AuthenticationParams => ({
 });
 
 export const mockAccountModel = (): AccountModel => ({
-  accessToken: faker.git.shortSha(),
+  accessToken: faker.datatype.uuid(),
 });
