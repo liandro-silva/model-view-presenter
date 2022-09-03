@@ -37,12 +37,15 @@ const makeSut = (params?: SutParams): SutTypes => {
   };
 };
 
-const populateEmailField = (sut: RenderResult, email: string = "") => {
+const populateEmailField = (sut: RenderResult, email: string = ""): void => {
   const emailInput = sut.getByTestId("email") as HTMLInputElement;
   fireEvent.input(emailInput, { target: { value: email } });
 };
 
-const populatePasswordField = (sut: RenderResult, password: string = "") => {
+const populatePasswordField = (
+  sut: RenderResult,
+  password: string = ""
+): void => {
   const passwordInput = sut.getByTestId("password") as HTMLInputElement;
   fireEvent.input(passwordInput, { target: { value: password } });
 };
@@ -51,7 +54,7 @@ const simulateStatusForField = (
   sut: RenderResult,
   fieldName: string,
   validationError?: string
-) => {
+): void => {
   const emailStatus = sut.getByTestId(`${fieldName}-status`);
 
   expect(emailStatus.title).toBe(validationError || "");
@@ -62,7 +65,7 @@ const simulateValidSubmit = (
   sut: RenderResult,
   email: string = "",
   password: string = ""
-) => {
+): void => {
   populateEmailField(sut, email);
   populatePasswordField(sut, password);
 
@@ -197,7 +200,8 @@ describe("\n Page - Login \n", () => {
     const { email, password } = mockAuthentication();
 
     simulateValidSubmit(sut, email, password);
-    expect(localStorage.setItem).toHaveBeenCalledWith(
+    await waitFor(() => sut.getByTestId("form"));
+    expect(window.localStorage.setItem).toHaveBeenCalledWith(
       "accessToken",
       authenticationSpy.account.accessToken
     );
