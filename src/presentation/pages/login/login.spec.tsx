@@ -80,4 +80,15 @@ describe("\n Page - Login \n", () => {
     expect(emailStatus.title).toBe("");
     expect(emailStatus.textContent).toBe("🟢");
   });
+
+  it("should show valid password state if Validation succeeds", () => {
+    const { sut, validationStub } = makeSut();
+    validationStub.errorMessage = null;
+
+    const password = sut.getByTestId("password") as HTMLInputElement;
+    fireEvent.input(password, { target: { value: faker.internet.password() } });
+    const passwordStatus = sut.getByTestId("password-status");
+    expect(passwordStatus.title).toBe("");
+    expect(passwordStatus.textContent).toBe("🟢");
+  });
 });
