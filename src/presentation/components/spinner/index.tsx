@@ -11,7 +11,7 @@ const Spinner: React.FC<Props> = ({ isNegative, ...props }: Props) => {
   return (
     <div
       {...props}
-      data-testid="spinner"
+      data-testid="loading"
       className={[Styles.spinner, negativeClass, props.className].join(" ")}
     >
       <div />
