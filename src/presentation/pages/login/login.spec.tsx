@@ -106,4 +106,20 @@ describe("\n Page - Login \n", () => {
     const submitButton = sut.getByTestId("submit") as HTMLButtonElement;
     expect(submitButton.disabled).toBe(false);
   });
+
+  it("should show loading indicator on submit", () => {
+    const { sut } = makeSut();
+
+    const email = sut.getByTestId("email") as HTMLInputElement;
+    fireEvent.input(email, { target: { value: faker.internet.email() } });
+
+    const password = sut.getByTestId("password") as HTMLInputElement;
+    fireEvent.input(password, { target: { value: faker.internet.password() } });
+
+    const submitButton = sut.getByTestId("submit") as HTMLButtonElement;
+    fireEvent.click(submitButton);
+
+    const loadingIndicator = sut.getByTestId("loading");
+    expect(loadingIndicator).toBeTruthy();
+  });
 });
