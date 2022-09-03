@@ -14,6 +14,9 @@ import { ValidationStub, AuthenticationSpy } from "@/presentation/mocks";
 import { mockAuthentication } from "@/domain/mocks";
 import { InvalidCredentialsError } from "@/domain/errors";
 
+import { createMemoryHistory } from "history";
+import { Router } from "react-router-dom";
+
 type SutTypes = {
   sut: RenderResult;
   authenticationSpy: AuthenticationSpy;
@@ -23,12 +26,16 @@ type SutParams = {
   validationError: string;
 };
 
+const history = createMemoryHistory();
+
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub();
   const authenticationSpy = new AuthenticationSpy();
   validationStub.errorMessage = params?.validationError;
   const sut = render(
-    <Login validation={validationStub} authentication={authenticationSpy} />
+    <Router history={history}>
+      <Login validation={validationStub} authentication={authenticationSpy} />
+    </Router>
   );
 
   return {
@@ -205,5 +212,14 @@ describe("\n Page - Login \n", () => {
       "accessToken",
       authenticationSpy.account.accessToken
     );
+  });
+
+  it("should go to signup page", async () => {
+    const { sut } = makeSut();
+
+    const registerLink = sut.getByTestId("register");
+    fireEvent.click(registerLink);
+    expect(history.length).toBe(2);
+    expect(history.location.pathname).toBe("/signup");
   });
 });
