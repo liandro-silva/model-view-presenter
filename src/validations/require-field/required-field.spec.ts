@@ -3,7 +3,7 @@ import { RequiredFieldError } from "@/validations/errors";
 import { faker } from "@faker-js/faker";
 
 const makeSut = () => {
-  const sut = new RequiredFieldValidation("email");
+  const sut = new RequiredFieldValidation(faker.database.column());
   return {
     sut,
   };
