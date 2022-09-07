@@ -1,4 +1,7 @@
-import { RequiredFieldValidation } from "@/validations/validators";
+import {
+  RequiredFieldValidation,
+  EmailValidation,
+} from "@/validations/validators";
 import { ValidationBuilder as sut } from ".";
 
 describe("\n Validators - ValidationBuilder \n", () => {
@@ -7,5 +10,12 @@ describe("\n Validators - ValidationBuilder \n", () => {
 
     expect(validations.length).toBe(1);
     expect(validations).toEqual([new RequiredFieldValidation("any_field")]);
+  });
+
+  it("should return EmailValidation", () => {
+    const validations = sut.field("any_field").email().build();
+
+    expect(validations.length).toBe(1);
+    expect(validations).toEqual([new EmailValidation("any_field")]);
   });
 });
