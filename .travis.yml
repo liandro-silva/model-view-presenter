@@ -2,5 +2,5 @@ language: node.js
 node_js:
   - 16
 script: 
-  - eslint 'src/**'
+  - npm run lint'
   - npm run test:ci

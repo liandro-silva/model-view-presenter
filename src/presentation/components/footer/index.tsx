@@ -1,9 +1,9 @@
-import React, { memo } from "react";
+import React, { memo } from 'react'
 
-import styles from "./styles.scss";
+import styles from './styles.scss'
 
 const Footer: React.FC = () => {
-  return <footer className={styles.footer} />;
-};
+  return <footer className={styles.footer} />
+}
 
-export default memo(Footer);
+export default memo(Footer)

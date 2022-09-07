@@ -1,2 +1,2 @@
-export * from "./api-url.factory";
-export * from "./axios-http.factory";
+export * from './api-url.factory'
+export * from './axios-http.factory'

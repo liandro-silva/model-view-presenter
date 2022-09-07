@@ -1,1 +1,1 @@
-export * from "./field-validation.mocks";
+export * from './field-validation.mocks'

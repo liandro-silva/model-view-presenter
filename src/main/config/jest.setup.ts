@@ -1,2 +1,2 @@
-import "jest-environment-jsdom";
-import "jest-localstorage-mock";
+import 'jest-environment-jsdom'
+import 'jest-localstorage-mock'

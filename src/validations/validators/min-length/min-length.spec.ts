@@ -1,18 +1,26 @@
-import { InvalidFieldError } from "@/validations/errors";
-import { MinLengthValidation } from ".";
+import { InvalidFieldError } from '@/validations/errors'
+import { MinLengthValidation } from '.'
 
-const makeSut = () => new MinLengthValidation("field", 5);
+type SutProps = {
+  sut: MinLengthValidation
+}
 
-describe("\n Validators - MinLenghtValidation\n", () => {
-  it("should return error if value is invalid", () => {
-    const sut = makeSut();
-    const error = sut.validate("13");
-    expect(error).toEqual(new InvalidFieldError());
-  });
+const makeSut = (): SutProps => {
+  return {
+    sut: new MinLengthValidation('field', 5)
+  }
+}
 
-  it("should return falsy if value is valid", () => {
-    const sut = makeSut();
-    const error = sut.validate("123456");
-    expect(error).toBeFalsy();
-  });
-});
+describe('\n Validators - MinLenghtValidation\n', () => {
+  it('should return error if value is invalid', () => {
+    const { sut } = makeSut()
+    const error = sut.validate('13')
+    expect(error).toEqual(new InvalidFieldError())
+  })
+
+  it('should return falsy if value is valid', () => {
+    const { sut } = makeSut()
+    const error = sut.validate('123456')
+    expect(error).toBeFalsy()
+  })
+})

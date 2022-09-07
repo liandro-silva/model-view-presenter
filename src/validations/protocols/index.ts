@@ -1,1 +1,1 @@
-export * from "./field-validation.protocol";
+export * from './field-validation.protocol'
