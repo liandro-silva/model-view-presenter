@@ -1,6 +1,6 @@
 language: node.js
 node_js:
   - 16
-script: 
-  - npm run lint'
+script:
+  - npm run lint
   - npm run test:ci
