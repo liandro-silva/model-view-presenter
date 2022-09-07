@@ -7,6 +7,7 @@ module.exports = {
     '!<rootDir>/src/presentation/protocols/*',
     '!<rootDir>/src/domain/**/*',
     '!<rootDir>/src/presentation/router/**/*',
+    '!<rootDir>/src/presentation/components/*',
     '!**/*.d.ts'
   ],
   coverageDirectory: 'coverage',
