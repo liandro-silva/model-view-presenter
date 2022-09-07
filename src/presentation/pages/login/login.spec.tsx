@@ -6,7 +6,7 @@ import {
   cleanup,
   waitFor,
 } from "@testing-library/react";
-import Login from ".";
+import { Login } from "@/presentation/pages";
 
 import { faker } from "@faker-js/faker";
 
