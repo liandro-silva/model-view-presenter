@@ -1,0 +1,1 @@
+[![Build Status](https://app.travis-ci.com/liandro-silva/clean-react.svg?branch=main)](https://app.travis-ci.com/liandro-silva/clean-react)
