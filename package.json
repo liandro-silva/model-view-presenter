@@ -11,7 +11,8 @@
     "test:watch": "npm run test -- --watch",
     "test:staged": "npm run test -- --findRelatedTests",
     "lint": "eslint 'src/**' --fix",
-    "test:ci": "npm run test -- --coverage"
+    "test:ci": "npm run test -- --coverage",
+    "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.4.0",
@@ -25,6 +26,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.36.2",
     "clean-webpack-plugin": "4.0.0",
+    "coveralls": "^3.1.1",
     "css-loader": "^6.7.1",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^22.0.0",
