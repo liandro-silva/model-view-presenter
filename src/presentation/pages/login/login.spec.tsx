@@ -96,6 +96,15 @@ const testButtonIsDisabled = (
   expect(el.disabled).toBe(isDisabled)
 }
 
+const testInputIsDisabled = (
+  sut: RenderResult,
+  fieldName: string,
+  isDisabled: boolean
+): void => {
+  const el = sut.getByTestId(fieldName) as HTMLInputElement
+  expect(el.disabled).toBe(isDisabled)
+}
+
 const simulateValidSubmit = async (
   sut: RenderResult,
   email: string = '',
@@ -177,6 +186,15 @@ describe('\n Page - Login \n', () => {
     await simulateValidSubmit(sut)
 
     testElementExist(sut, 'loading')
+  })
+
+  it('should disable fields on submit', async () => {
+    const { sut } = makeSut()
+
+    await simulateValidSubmit(sut)
+
+    testInputIsDisabled(sut, 'email', true)
+    testInputIsDisabled(sut, 'password', true)
   })
 
   it('should call Authentication with correct values', async () => {
