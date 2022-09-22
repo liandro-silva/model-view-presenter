@@ -75,16 +75,18 @@ const Login: React.FC<Props> = ({ validation, authentication }) => {
             name="email"
             type="email"
             id="email"
+            disabled={state.isLoading}
           />
           <Input
             placeholder="Digite sua senha"
             name="password"
             type="password"
             id="password"
+            disabled={state.isLoading}
           />
           <button
             data-testid="submit"
-            disabled={!!state.emailError || !!state.passwordError}
+            disabled={!!state.emailError || !!state.passwordError || state.isLoading}
             className={styles.submit}
             type="submit"
           >

@@ -21,6 +21,10 @@ input[type="password"], input[type="email"] {
   &:focus {
     outline-color: $primaryLight;
   }
+
+  &:disabled {
+    border-color: $disabledColor;
+  }
 }
 
 button {
