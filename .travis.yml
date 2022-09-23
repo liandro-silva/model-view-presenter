@@ -1,6 +1,18 @@
 language: node.js
 node_js:
-  - 16
+- 16
 script:
-  - npm run lint
-  - npm run test:coveralls
+- npm run lint
+- npm run test:coveralls
+env:
+  global:
+    secure: EmWOaXjsYKszYo1dq/6HwYeutAhi3r4BfLVxvB9dqqe6cBVe8BGsodPZ9LvoorazhB4yZ63J5zw6WlyfHDIQCD/sc30Gt1sGH7q78pLKAMtWAIcT82ZrJmMCbL+T8j1G3Ci2jdo4EioHYOPmUQapVYdlXja0hYAtS2ZuFlTToHC2IiVT1SJD9DWGQLtlnImGbyBCIz2qJmGC6oFAAc1NhNCCGMMQiHL5lYrgIa94dcdU+54+yNpPIerwjeNG3HChServC+QfQ9s2OYEHy22NbLDKOUL+U2BGoueHUzHPr6ClxG69yekxf4C0El4p7qLRnkHkUsxOvkVnqs6Gs9KrZlrk6CXuWTlYzk8leN4H6vvRs/ZU12nlPJ+DHyP1K5PtmVtjL+048lJraVo+4QH/Z07oz7rkX8keXnB9etOMPgRnzRtsRX7phIPBWiRNIZ9Iu+9+sjZ578cm8+bQbn2FpdU/F3aPzsHUp8qr7OHn31S+Co0GgPn10aiDcuirR4q2YEYXIxc7fqe3ObP5ZcLZEh/KTx7wP91Yz4noIePEyIx8YkPh+HA9XbF/c4V0RaJVcItc3TYvkXQmpZgPgRkPdTeLlkTkNldHnj5614/l+f651A3V0XNI549In1URNonjdrJwe4oTlGw0nAF3rqg2sz6mjhoen+zwQh8nrlBOeI4=
+addons:
+  sonarcloud:
+    organization: "liandro-silva"
+    token:
+      secure: "EmWOaXjsYKszYo1dq/6HwYeutAhi3r4BfLVxvB9dqqe6cBVe8BGsodPZ9LvoorazhB4yZ63J5zw6WlyfHDIQCD/sc30Gt1sGH7q78pLKAMtWAIcT82ZrJmMCbL+T8j1G3Ci2jdo4EioHYOPmUQapVYdlXja0hYAtS2ZuFlTToHC2IiVT1SJD9DWGQLtlnImGbyBCIz2qJmGC6oFAAc1NhNCCGMMQiHL5lYrgIa94dcdU+54+yNpPIerwjeNG3HChServC+QfQ9s2OYEHy22NbLDKOUL+U2BGoueHUzHPr6ClxG69yekxf4C0El4p7qLRnkHkUsxOvkVnqs6Gs9KrZlrk6CXuWTlYzk8leN4H6vvRs/ZU12nlPJ+DHyP1K5PtmVtjL+048lJraVo+4QH/Z07oz7rkX8keXnB9etOMPgRnzRtsRX7phIPBWiRNIZ9Iu+9+sjZ578cm8+bQbn2FpdU/F3aPzsHUp8qr7OHn31S+Co0GgPn10aiDcuirR4q2YEYXIxc7fqe3ObP5ZcLZEh/KTx7wP91Yz4noIePEyIx8YkPh+HA9XbF/c4V0RaJVcItc3TYvkXQmpZgPgRkPdTeLlkTkNldHnj5614/l+f651A3V0XNI549In1URNonjdrJwe4oTlGw0nAF3rqg2sz6mjhoen+zwQh8nrlBOeI4=" # encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - sonar-scanner
