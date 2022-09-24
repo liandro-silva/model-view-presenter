@@ -34,4 +34,11 @@ describe('\n UseCase - Remote Authentication \n', () => {
     await sut.execute(mockAddAccount())
     expect(httpPostClientSpy.url).toBe(url)
   })
+
+  it('should call HttpPostClient with correct body', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    const addAccountParams = mockAddAccount()
+    await sut.execute(addAccountParams)
+    expect(httpPostClientSpy.body).toEqual(addAccountParams)
+  })
 })
