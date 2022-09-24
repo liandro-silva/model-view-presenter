@@ -73,7 +73,7 @@ describe('\n Page - Login \n', () => {
     const { sut } = makeSut({ validationError })
     const { email } = mockAuthentication()
 
-    Helper.populateEmailField(sut, email)
+    Helper.populateField(sut, 'email', email)
     Helper.testStatusForField(sut, 'email', validationError)
   })
 
@@ -82,7 +82,7 @@ describe('\n Page - Login \n', () => {
     const { sut } = makeSut({ validationError })
     const { password } = mockAuthentication()
 
-    Helper.populatePasswordField(sut, password)
+    Helper.populateField(sut, 'password', password)
     Helper.testStatusForField(sut, 'password', validationError)
   })
 
@@ -90,7 +90,7 @@ describe('\n Page - Login \n', () => {
     const { sut } = makeSut()
     const { email } = mockAuthentication()
 
-    Helper.populateEmailField(sut, email)
+    Helper.populateField(sut, 'email', email)
     Helper.testStatusForField(sut, 'email')
   })
 
@@ -98,7 +98,7 @@ describe('\n Page - Login \n', () => {
     const { sut } = makeSut()
     const { password } = mockAuthentication()
 
-    Helper.populatePasswordField(sut, password)
+    Helper.populateField(sut, 'password', password)
     Helper.testStatusForField(sut, 'password')
   })
 
@@ -106,8 +106,8 @@ describe('\n Page - Login \n', () => {
     const { sut } = makeSut()
     const { email, password } = mockAuthentication()
 
-    Helper.populateEmailField(sut, email)
-    Helper.populatePasswordField(sut, password)
+    Helper.populateField(sut, 'email', email)
+    Helper.populateField(sut, 'password', password)
     Helper.testButtonIsDisabled(sut, 'submit', false)
   })
 

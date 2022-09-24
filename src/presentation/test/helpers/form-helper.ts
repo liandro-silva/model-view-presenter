@@ -25,17 +25,9 @@ export const testStatusForField = (
   expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
-export const populateEmailField = (sut: RenderResult, email: string = ''): void => {
-  const emailInput = sut.getByTestId('email') as HTMLInputElement
-  fireEvent.input(emailInput, { target: { value: email } })
-}
-
-export const populatePasswordField = (
-  sut: RenderResult,
-  password: string = ''
-): void => {
-  const passwordInput = sut.getByTestId('password') as HTMLInputElement
-  fireEvent.input(passwordInput, { target: { value: password } })
+export const populateField = (sut: RenderResult, fieldName: string ,value: string = ''): void => {
+  const el = sut.getByTestId(fieldName) as HTMLInputElement
+  fireEvent.input(el, { target: { value } })
 }
 
 export const testElementExist = (sut: RenderResult, fieldName: string): void => {
@@ -66,8 +58,8 @@ export const simulateValidSubmit = async (
   email: string = '',
   password: string = ''
 ): Promise<void> => {
-  populateEmailField(sut, email)
-  populatePasswordField(sut, password)
+  populateField(sut, 'email', email)
+  populateField(sut, 'password', password)
 
   await waitFor(() => {
     const form = sut.getByTestId('form')
