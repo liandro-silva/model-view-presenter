@@ -14,6 +14,7 @@ import { Router } from 'react-router-dom'
 import { ValidationStub } from '@/presentation/mocks'
 
 import * as Helper from '@/presentation/test/helpers'
+import { mockAddAccount } from '@/domain/mocks'
 
 type SutTypes = {
   sut: RenderResult
@@ -62,5 +63,32 @@ describe('\n Page - Signup \n', () => {
 
     Helper.populateField(sut, 'name')
     Helper.testStatusForField(sut, 'name', validationError)
+  })
+
+  it('should show email error if Validation fails', () => {
+    const validationError = faker.lorem.words()
+    const { sut } = makeSut({ validationError })
+    const { email } = mockAddAccount()
+
+    Helper.populateField(sut, 'email', email)
+    Helper.testStatusForField(sut, 'email', validationError)
+  })
+
+  it('should show password error if Validation fails', () => {
+    const validationError = faker.lorem.words()
+    const { sut } = makeSut({ validationError })
+    const { password } = mockAddAccount()
+
+    Helper.populateField(sut, 'password', password)
+    Helper.testStatusForField(sut, 'password', validationError)
+  })
+
+  it('should show passwordConfirmation error if Validation fails', () => {
+    const validationError = faker.lorem.words()
+    const { sut } = makeSut({ validationError })
+    const { passwordConfirmation } = mockAddAccount()
+
+    Helper.populateField(sut, 'passwordConfirmation', passwordConfirmation)
+    Helper.testStatusForField(sut, 'passwordConfirmation', validationError)
   })
 })
