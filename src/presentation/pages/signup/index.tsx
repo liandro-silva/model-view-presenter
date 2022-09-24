@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles.scss'
 import Context from '@/presentation/contexts/form'
 import {
@@ -8,21 +8,37 @@ import {
   FormStatus
 } from '@/presentation/components'
 
+import { Validation } from '@/presentation/protocols'
+
 import { Link } from 'react-router-dom'
 
-const Signup: React.FC = () => {
+type Props = {
+  validation: Validation
+}
+
+const Signup: React.FC<Props> = ({ validation }) => {
   const [state, setState] = useState({
     isLoading: false,
     name: '',
     email: '',
     password: '',
     passwordConfirmation: '',
-    nameError: 'Campo obrigatório',
-    emailError: 'Campo obrigatório',
-    passwordError: 'Campo obrigatório',
-    passwordConfirmationError: 'Campo obrigatório',
+    nameError: '',
+    emailError: '',
+    passwordError: '',
+    passwordConfirmationError: '',
     mainError: ''
   })
+
+  useEffect(() => {
+    setState({
+      ...state,
+      nameError: validation.validate('name', state.name),
+      emailError: validation.validate('email', state.email),
+      passwordError: validation.validate('password', state.password),
+      passwordConfirmationError: validation.validate('passwordConfirmation', state.passwordConfirmation)
+    })
+  }, [state.name, state.email, state.password, state.passwordConfirmation])
   return (
     <div className={styles.signup}>
       <LoginHeader />
@@ -33,28 +49,24 @@ const Signup: React.FC = () => {
           <h2>Criar Conta</h2>
           <Input
             placeholder="Digite seu nome"
-            data-testid="name"
             name="name"
             type="text"
             id="name"
           />
           <Input
             placeholder="Digite seu e-mail"
-            data-testid="email"
             name="email"
             type="email"
             id="email"
           />
           <Input
             placeholder="Digite sua senha"
-            data-testid="password"
             name="password"
             type="password"
             id="password"
           />
           <Input
             placeholder="Digite sua senha novamente"
-            data-testid="passwordConfirmation"
             name="passwordConfirmation"
             type="password"
             id="passwordConfirmation"
