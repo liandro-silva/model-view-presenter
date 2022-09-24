@@ -1,0 +1,55 @@
+@import '../../theme/colors.scss';
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  .form{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    align-self: center;
+    background-color: $white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px -1px $black;
+
+    h2 {
+      color: $primaryDark;
+      text-align: center;
+      font-size: 20px;
+      text-transform: uppercase;
+    }
+
+
+    .submit {
+      margin-top: 32px !important;
+      &:disabled {
+        background-color: $disabledBackground;
+        color: $disabledColor;
+        cursor: not-allowed;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    .link {
+      text-align: center;
+      color: $primary;
+      text-transform: lowercase;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 16px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+
+  }
+
+}
