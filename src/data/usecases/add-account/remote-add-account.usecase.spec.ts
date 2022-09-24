@@ -68,4 +68,13 @@ describe('\n UseCase - Remote Authentication \n', () => {
     const promise = sut.execute(mockAddAccount())
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
+
+  it('should throw UnexpectedError if HttpPostClient returns 404', async () => {
+    const { sut, httpPostClientSpy } = makeSut()
+    httpPostClientSpy.response = {
+      statusCode: HttpStatusCode.notFound
+    }
+    const promise = sut.execute(mockAddAccount())
+    await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
 })
