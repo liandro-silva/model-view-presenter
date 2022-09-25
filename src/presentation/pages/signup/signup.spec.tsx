@@ -13,7 +13,7 @@ import { faker } from '@faker-js/faker'
 import { createMemoryHistory } from 'history'
 import { Router } from 'react-router-dom'
 
-import { AddAccountSpy, ValidationStub } from '@/presentation/mocks'
+import { AddAccountSpy, SaveAccessTokenMock, ValidationStub } from '@/presentation/mocks'
 
 import * as Helper from '@/presentation/test/helpers'
 import { mockAddAccount } from '@/domain/mocks'
@@ -23,6 +23,7 @@ import { EmailInUseError } from '@/domain/errors'
 type SutTypes = {
   sut: RenderResult
   addAccountSpy: AddAccount
+  saveAccessTokenMock: SaveAccessTokenMock
 
 }
 
@@ -34,18 +35,20 @@ const history = createMemoryHistory({ initialEntries: ['/login'] })
 
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
+  const saveAccessTokenMock = new SaveAccessTokenMock()
   validationStub.errorMessage = params?.validationError
 
   const addAccountSpy = new AddAccountSpy()
   const sut = render(
     <Router history={history}>
-      <Signup validation={validationStub} addAccount={addAccountSpy}/>
+      <Signup validation={validationStub} addAccount={addAccountSpy} saveAccessToken={saveAccessTokenMock}/>
     </Router>
   )
 
   return {
     sut,
-    addAccountSpy
+    addAccountSpy,
+    saveAccessTokenMock
   }
 }
 

@@ -10,15 +10,18 @@ import {
 
 import { Validation } from '@/presentation/protocols'
 
-import { Link } from 'react-router-dom'
-import { AddAccount } from '@/domain/usecases'
+import { Link, useHistory } from 'react-router-dom'
+import { AddAccount, SaveAccessToken } from '@/domain/usecases'
 
 type Props = {
   validation: Validation
   addAccount: AddAccount
+  saveAccessToken: SaveAccessToken
 }
 
-const Signup: React.FC<Props> = ({ validation, addAccount }) => {
+const Signup: React.FC<Props> = ({ validation, addAccount, saveAccessToken }) => {
+  const history = useHistory()
+
   const [state, setState] = useState({
     isLoading: false,
     name: '',
@@ -52,12 +55,14 @@ const Signup: React.FC<Props> = ({ validation, addAccount }) => {
         ...state,
         isLoading: true
       })
-      await addAccount.execute({
+      const account = await addAccount.execute({
         name: state.name,
         email: state.email,
         password: state.password,
         passwordConfirmation: state.passwordConfirmation
       })
+      saveAccessToken.execute(account.accessToken)
+      history.replace('/login')
     } catch (error) {
       setState({
         ...state,
