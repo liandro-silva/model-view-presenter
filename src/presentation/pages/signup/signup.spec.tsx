@@ -147,4 +147,15 @@ describe('\n Page - Signup \n', () => {
 
     Helper.testElementExist(sut, 'loading')
   })
+
+  it('should disable fields on submit', async () => {
+    const { sut } = makeSut()
+
+    await simulateValidSubmit(sut)
+
+    Helper.testInputIsDisabled(sut, 'name', true)
+    Helper.testInputIsDisabled(sut, 'email', true)
+    Helper.testInputIsDisabled(sut, 'password', true)
+    Helper.testInputIsDisabled(sut, 'passwordConfirmation', true)
+  })
 })
