@@ -35,12 +35,12 @@ export const testElementExist = (sut: RenderResult, fieldName: string): void => 
   expect(el).toBeTruthy()
 }
 
-export const testElementText = (
+export const testElementText = async (
   sut: RenderResult,
   fieldName: string,
   text: string
-): void => {
-  const el = sut.getByTestId(fieldName)
+): Promise<void> => {
+  const el = await sut.findByTestId(fieldName)
   expect(el.textContent).toBe(text)
 }
 

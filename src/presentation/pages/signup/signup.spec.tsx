@@ -18,6 +18,7 @@ import { AddAccountSpy, ValidationStub } from '@/presentation/mocks'
 import * as Helper from '@/presentation/test/helpers'
 import { mockAddAccount } from '@/domain/mocks'
 import { AddAccount } from '@/domain/usecases'
+import { EmailInUseError } from '@/domain/errors'
 
 type SutTypes = {
   sut: RenderResult
@@ -162,5 +163,17 @@ describe('\n Page - Signup \n', () => {
     Helper.testInputIsDisabled(sut, 'email', true)
     Helper.testInputIsDisabled(sut, 'password', true)
     Helper.testInputIsDisabled(sut, 'passwordConfirmation', true)
+  })
+
+  it('should present error if AddAccount fails', async () => {
+    const { sut, addAccountSpy } = makeSut()
+    const error = new EmailInUseError()
+    jest.spyOn(addAccountSpy, 'execute').mockRejectedValueOnce(error)
+
+    await Helper.simulateValidSubmit(sut)
+    await waitFor(async () => {
+      Helper.testElementText(sut, 'main-error', error.message)
+    })
+    Helper.testChildCount(sut, 'error-wrap', 1)
   })
 })
