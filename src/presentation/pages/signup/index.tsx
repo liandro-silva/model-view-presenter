@@ -11,12 +11,14 @@ import {
 import { Validation } from '@/presentation/protocols'
 
 import { Link } from 'react-router-dom'
+import { AddAccount } from '@/domain/usecases'
 
 type Props = {
   validation: Validation
+  addAccount: AddAccount
 }
 
-const Signup: React.FC<Props> = ({ validation }) => {
+const Signup: React.FC<Props> = ({ validation, addAccount }) => {
   const [state, setState] = useState({
     isLoading: false,
     name: '',
@@ -49,6 +51,12 @@ const Signup: React.FC<Props> = ({ validation }) => {
       setState({
         ...state,
         isLoading: true
+      })
+      await addAccount.execute({
+        name: state.name,
+        email: state.email,
+        password: state.password,
+        passwordConfirmation: state.passwordConfirmation
       })
     } catch (error) {
       setState({
