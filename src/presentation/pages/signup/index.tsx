@@ -73,28 +73,35 @@ const Signup: React.FC<Props> = ({ validation }) => {
             name="name"
             type="text"
             id="name"
+            disabled={state.isLoading}
           />
           <Input
             placeholder="Digite seu e-mail"
             name="email"
             type="email"
             id="email"
+            disabled={state.isLoading}
+
           />
           <Input
             placeholder="Digite sua senha"
             name="password"
             type="password"
             id="password"
+            disabled={state.isLoading}
+
           />
           <Input
             placeholder="Digite sua senha novamente"
             name="passwordConfirmation"
             type="password"
             id="passwordConfirmation"
+            disabled={state.isLoading}
+
           />
           <button
             data-testid="submit"
-            disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError}
+            disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError || state.isLoading}
             className={styles.submit}
             type="submit"
           >
