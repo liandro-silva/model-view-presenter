@@ -73,11 +73,6 @@ const Signup: React.FC<Props> = ({ validation, addAccount, saveAccessToken }) =>
         isLoading: false,
         mainError: error.message
       })
-    } finally {
-      setState({
-        ...state,
-        isLoading: false
-      })
     }
   }
   return (
