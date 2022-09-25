@@ -46,17 +46,6 @@ describe('\n Page - Signup \n', () => {
     cleanup()
   })
 
-  it('should start with initial states', () => {
-    const { sut } = makeSut()
-
-    Helper.testChildCount(sut, 'error-wrap', 0)
-    Helper.testButtonIsDisabled(sut, 'submit', true)
-    Helper.testStatusForField(sut, 'email')
-    Helper.testStatusForField(sut, 'name')
-    Helper.testStatusForField(sut, 'password')
-    Helper.testStatusForField(sut, 'passwordConfirmation')
-  })
-
   it('should show name error if Validation fails', () => {
     const validationError = faker.lorem.words()
     const { sut } = makeSut({ validationError })
@@ -118,5 +107,16 @@ describe('\n Page - Signup \n', () => {
 
     Helper.populateField(sut, 'passwordConfirmation')
     Helper.testStatusForField(sut, 'passwordConfirmation')
+  })
+
+  it('should enable submit button is form is valid', () => {
+    const { sut } = makeSut()
+    const { email, password, name, passwordConfirmation } = mockAddAccount()
+
+    Helper.populateField(sut, 'email', email)
+    Helper.populateField(sut, 'name', name)
+    Helper.populateField(sut, 'password', password)
+    Helper.populateField(sut, 'passwordConfirmation', passwordConfirmation)
+    Helper.testButtonIsDisabled(sut, 'submit', false)
   })
 })

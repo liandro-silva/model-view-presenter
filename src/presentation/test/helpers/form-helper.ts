@@ -19,10 +19,10 @@ export const testStatusForField = (
   fieldName: string,
   validationError?: string
 ): void => {
-  const fieldStatus = sut.getByTestId(`${fieldName}-status`)
+  const el = sut.getByTestId(`${fieldName}-status`)
 
-  expect(fieldStatus.title).toBe(validationError || '')
-  expect(fieldStatus.textContent).toBe(validationError ? '🔴' : '🟢')
+  expect(el.title).toBe(validationError || '')
+  expect(el.textContent).toBe(validationError ? '🔴' : '🟢')
 }
 
 export const populateField = (sut: RenderResult, fieldName: string ,value: string = ''): void => {
