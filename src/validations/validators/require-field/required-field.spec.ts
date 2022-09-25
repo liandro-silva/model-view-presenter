@@ -5,8 +5,8 @@ type SutProps = {
   sut: RequiredFieldValidation
 }
 
-const makeSut = (): SutProps => {
-  const sut = new RequiredFieldValidation(faker.database.column())
+const makeSut = (field: string): SutProps => {
+  const sut = new RequiredFieldValidation(field)
   return {
     sut
   }
@@ -14,14 +14,16 @@ const makeSut = (): SutProps => {
 
 describe('\n Validators - Required Field \n', () => {
   it('should return error if field is empy', () => {
-    const { sut } = makeSut()
-    const error = sut.validate('')
+    const field = faker.database.column()
+    const { sut } = makeSut(field)
+    const error = sut.validate({ [field]: '' })
     expect(error).toEqual(new RequiredFieldError())
   })
 
   it('should return falsy if field is not empy', () => {
-    const { sut } = makeSut()
-    const error = sut.validate(faker.lorem.words())
+    const field = faker.database.column()
+    const { sut } = makeSut(field)
+    const error = sut.validate({ [field]: faker.random.words() })
     expect(error).toBeFalsy()
   })
 })

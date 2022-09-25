@@ -23,17 +23,19 @@ describe('\n Validators - ValidationComposite \n', () => {
   it('should return error if any validation fails', () => {
     const { sut, fieldValidationsSpy } = makeSut('any_field')
     const errorMessage = faker.lorem.words()
+    const fieldName = faker.database.column()
 
     fieldValidationsSpy[0].error = new Error(errorMessage)
     fieldValidationsSpy[1].error = new Error(faker.lorem.words())
 
-    const error = sut.validate('any_field', faker.lorem.word())
+    const error = sut.validate('any_field', { [fieldName]: faker.lorem.word() })
     expect(error).toBe(error)
   })
   it('should return falsy if there is no error', () => {
     const { sut } = makeSut('any_field')
+    const fieldName = faker.database.column()
 
-    const error = sut.validate('any_field', faker.lorem.word())
+    const error = sut.validate('any_field', { [fieldName]: faker.lorem.word() })
     expect(error).toBeFalsy()
   })
 })
