@@ -38,7 +38,7 @@ const Signup: React.FC<Props> = ({ validation, addAccount }) => {
       nameError: validation.validate('name', state.name),
       emailError: validation.validate('email', state.email),
       passwordError: validation.validate('password', state.password),
-      passwordConfirmationError: validation.validate('passwordConfirmation', state.passwordConfirmation)
+      passwordConfirmationError: validation.validate('password', state.passwordConfirmation)
     })
   }, [state.name, state.email, state.password, state.passwordConfirmation])
 
@@ -47,7 +47,7 @@ const Signup: React.FC<Props> = ({ validation, addAccount }) => {
   ): Promise<void> => {
     event.preventDefault()
     try {
-      if (state.isLoading || state.emailError || state.passwordError) return
+      if (state.isLoading || state.nameError || state.emailError || state.passwordError || state.passwordConfirmationError) return
       setState({
         ...state,
         isLoading: true
@@ -63,6 +63,11 @@ const Signup: React.FC<Props> = ({ validation, addAccount }) => {
         ...state,
         isLoading: false,
         mainError: error.message
+      })
+    } finally {
+      setState({
+        ...state,
+        isLoading: false
       })
     }
   }
