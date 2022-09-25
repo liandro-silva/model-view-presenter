@@ -72,9 +72,9 @@ const Signup: React.FC<Props> = ({ validation }) => {
             id="passwordConfirmation"
           />
           <button
-            className={styles.submit}
             data-testid="submit"
-            disabled
+            disabled={!!state.nameError || !!state.emailError || !!state.passwordError || !!state.passwordConfirmationError}
+            className={styles.submit}
             type="submit"
           >
             Cadastrar
