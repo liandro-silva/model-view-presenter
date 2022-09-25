@@ -2,7 +2,9 @@ import React from 'react'
 import {
   render,
   RenderResult,
-  cleanup
+  cleanup,
+  waitFor,
+  fireEvent
 } from '@testing-library/react'
 import { Signup } from '@/presentation/pages'
 
@@ -39,6 +41,24 @@ const makeSut = (params?: SutParams): SutTypes => {
   return {
     sut
   }
+}
+
+const simulateValidSubmit = async (
+  sut: RenderResult,
+  name: string = faker.name.fullName(),
+  email: string = faker.internet.email(),
+  password: string = faker.internet.password(),
+  passwordConfirmation: string = faker.internet.password()
+): Promise<void> => {
+  Helper.populateField(sut, 'name', name)
+  Helper.populateField(sut, 'email', email)
+  Helper.populateField(sut, 'password', password)
+  Helper.populateField(sut, 'passwordConfirmation', passwordConfirmation)
+
+  await waitFor(() => {
+    const form = sut.getByTestId('form')
+    fireEvent.submit(form)
+  })
 }
 
 describe('\n Page - Signup \n', () => {
@@ -118,5 +138,13 @@ describe('\n Page - Signup \n', () => {
     Helper.populateField(sut, 'password', password)
     Helper.populateField(sut, 'passwordConfirmation', passwordConfirmation)
     Helper.testButtonIsDisabled(sut, 'submit', false)
+  })
+
+  it('should show loading indicator on submit', async () => {
+    const { sut } = makeSut()
+
+    await simulateValidSubmit(sut)
+
+    Helper.testElementExist(sut, 'loading')
   })
 })
