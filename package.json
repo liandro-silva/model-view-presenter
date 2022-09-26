@@ -12,9 +12,11 @@
     "test:staged": "npm run test -- --findRelatedTests",
     "lint": "eslint 'src/**' --fix",
     "test:ci": "npm run test -- --coverage",
+    "e2e:start": "cypress open",
     "test:coveralls": "npm run test:ci && coveralls < coverage/lcov.info"
   },
   "devDependencies": {
+    "@cypress/webpack-preprocessor": "^5.4.5",
     "@faker-js/faker": "^7.4.0",
     "@testing-library/react": "^13.3.0",
     "@types/axios": "^0.14.0",
@@ -55,6 +57,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "cypress": "^8.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "5.2.0"
