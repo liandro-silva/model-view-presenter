@@ -20,6 +20,4 @@ deploy:
   app: lw-fordevs-react
   skip_cleanup: true
   on:
-    branches:
-      only:
-        - main
+    all_branches: true
