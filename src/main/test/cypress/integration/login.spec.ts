@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 describe('\n e2e - Login\n', () => {
   beforeEach(() => {
     cy.visit('/login');
@@ -7,5 +8,17 @@ describe('\n e2e - Login\n', () => {
       cy.getByTestId('password-status').should('have.attr', 'title', 'Campo obrigatório').should('contain.text', '🔴')
       cy.getByTestId('submit').should('have.attr', 'disabled')
       cy.getByTestId('error-wrap').should('not.have.descendants')
+    });
+
+    it('should present error state if form is invalid', () => {
+      cy.getByTestId('email').focus().type(faker.random.words())
+      cy.getByTestId('email-status').should('have.attr', 'title', 'Campo inválido').should('contain.text', '🔴')
+
+      cy.getByTestId('password').focus().type(faker.random.alphaNumeric(3))
+      cy.getByTestId('password-status').should('have.attr', 'title', 'Campo inválido').should('contain.text', '🔴')
+
+      cy.getByTestId('submit').should('have.attr', 'disabled')
+      cy.getByTestId('error-wrap').should('not.have.descendants')
+
     });
 });
