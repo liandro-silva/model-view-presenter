@@ -6,7 +6,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'main-bundle-[chunkhash].js',
-    publicPath: '/'
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', 'scss'],

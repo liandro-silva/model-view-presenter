@@ -27,7 +27,9 @@ module.exports = merge(common, {
   },
   externals: {
     react: 'React',
-    'react-dom': 'ReactDOM'
+    axios: 'axios',
+    recoil: 'Recoil',
+    'react-dom': 'ReactDOM',
   },
   plugins: [
     new HtmlWebpackPlugin(
@@ -36,7 +38,7 @@ module.exports = merge(common, {
       }
     ),
     new EnvironmentPlugin({
-      API_URL: 'http://fordevs.herokuapp.com/api'
+      API_URL: 'https://fordevs.herokuapp.com/api'
     }),
     new CssExtractPlugin({
       filename: 'main-bundle[chunkhash].css'
