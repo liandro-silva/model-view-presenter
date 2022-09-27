@@ -20,7 +20,6 @@ deploy:
   app: lw-fordevs-react
   skip_cleanup: true
   on:
-    repo: https://github.com/liandro-silva/clean-react
     branches:
       only:
         - main
