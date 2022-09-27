@@ -13,3 +13,8 @@ script:
   - npm run lint
   - npm run test:coveralls
   - sonar-scanner
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API
+  app: lw-fordevs-react
+  skip_cleanup: true
