@@ -1,4 +1,3 @@
+dist
 node_modules/
-dist/
-coverage/
-dist/index.html
+coverage

@@ -67,4 +67,4 @@ describe('\n e2e - Login\n', () => {
       cy.url().should('eq', `${baseUrl}/`)
       cy.window().then(window => assert.isOk(window.localStorage.getItem('accessToken')))
     }); 
-});
+}); 

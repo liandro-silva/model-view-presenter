@@ -1,4 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { EnvironmentPlugin } = require('webpack')
+
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common')
 module.exports = merge(common, {
@@ -22,6 +24,7 @@ module.exports = merge(common, {
       }]
     }]
   },
+  devtool: 'inline-source-map',
   devServer: {
     devMiddleware: {
       writeToDisk: true
@@ -32,11 +35,10 @@ module.exports = merge(common, {
     historyApiFallback: true,
     port: 8080
   },
-  externals: {
-    react: 'React',
-    'react-dom': 'ReactDOM'
-  },
   plugins: [
+    new EnvironmentPlugin({
+      API_URL: 'http://fordevs.herokuapp.com/api'
+    }),
     new HtmlWebpackPlugin(
       {
         template: './template.dev.html'

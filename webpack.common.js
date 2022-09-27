@@ -1,6 +1,5 @@
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const { EnvironmentPlugin } = require('webpack')
 
 module.exports = {
   entry: './src/main/index.tsx',
@@ -16,9 +15,6 @@ module.exports = {
     }
   },
   plugins: [
-    new CleanWebpackPlugin(),
-    new EnvironmentPlugin({
-      API_URL: 'http://fordevs.herokuapp.com/api'
-    })
+    new CleanWebpackPlugin()
   ]
 }
