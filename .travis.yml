@@ -19,3 +19,8 @@ deploy:
     secure: f5UumrgniNFVRcqHGzBFTQP2ov3M2pEh1uhyLaERVyaaeiMryF3Bi+jTDGkH2wnCjXivd5Z5Ez1yh5kz2sxDJJAysvQu6rg7hx4olV5aSMp/Dg5f3OcShHG0S5ZGnSP+eIpcdEHJ7zMjoy4HM3bQDV2GJc0tykteO4OugqPEHYoraKiAfJcyUn5dkuBURRk8RffkEbi1tP0QJWdXyrpQw51FY8+PcYCx+ARSbIKToRP//R7vAMpA1OG2Urbfx8YJv6t6sOqRSu2IY6v/echenrlLX1wsB5gLoqmslSZM3uzH3RkDHSTCivJfidfP6UVvIEAW+fyma5CRHuxLw+Yfx9SUFSFra3x4ebH1qpiOR6Ae8V8nVJR8WBm6F91au99wJyxJLscLNK5N3QzNX1C+T9dKWMYfS0/rHXZhcn8jyofK6965J/gojMrjjC2ZaxTG0bkeqpUKzlpFzUuCo19aSneHZ+bX4dlIGGjEabfjkZPboi8jxQhW27c2kU3KTkVVBoBbHR5SlSJWaSnqSZiY41OF1tbRBNu18z0+eNN8ooTp5g+4ZsKRfRPRZxsUZRbiA/pad6FD30scPtH0b0WF/zvxLANNZMFum8kD6lCvFG0P+KIGh5eotsX8n8lM4KhE3Ym4sTvho91xxPEd3ZhWVQRhs20n7+71NOdU2lH0230=
   app: lw-fordevs-react
   skip_cleanup: true
+  on:
+    repo: https://github.com/liandro-silva/clean-react
+    branches:
+      only:
+        - main
